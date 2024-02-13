@@ -4,13 +4,13 @@ function createPanel() {
     const css = ` #main_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 100px; right: 5px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #main_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #main_Panel .gh_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} `;
     const csspvp = ` #pvp_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 240px; right: 5px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #pvp_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #pvp_Panel .pvp_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} #pvp_Panel .gamee_input{text-align:center; border-bottom:solid gray 1px; color: white;} #pvp_Panel .gamee_input input::placeholder {color: #4b4b4b;} #pvp_Panel .gameee_input{text-align:center; border-bottom:solid gray 1px; color: white;} #pvp_Panel .gameee_input input::placeholder {color: #4b4b4b;}`;
     const cssresp = ` #resp_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 100px; right: 155px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #resp_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #resp_Panel .resp_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} `;
-    const csscode = ` #code_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 623px; right: 5px; z-index: 9999; width: 180px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #code_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 180px; cursor: all-scroll; } #code_Panel .code_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} `;
-    const cssres = ` #res_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 532px; right: 155px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #res_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #res_Panel .res_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} #res_Panel ul {margin-left:-30px; color:white; margin:7px 0px 5px 0px; padding: 0px; text-align: center;} `;
-    const csslpvm = ` #lpvm_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 414px; right: 5px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #lpvm_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #lpvm_Panel .lpvm_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} #lpvm_Panel .pvm_killed {cursor:pointer;text-align:center; border-LGtom:solid gray 1px;text-align:center; color:white;} #lpvm_Panel .gamee_input{text-align:center; border-bottom:solid gray 1px; color: white;} `;
+    const csscode = ` #code_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 644px; right: 5px; z-index: 9999; width: 180px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #code_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 180px; cursor: all-scroll; } #code_Panel .code_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} `;
+    const cssres = ` #res_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 638px; right: 155px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #res_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #res_Panel .res_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} #res_Panel ul {margin-left:-30px; color:white; margin:7px 0px 5px 0px; padding: 0px; text-align: center;} `;
+    const csslpvm = ` #lpvm_Panel { background: rgba(0,0,0,0.9); position: fixed; top: 435px; right: 5px; z-index: 9999; width: 150px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #lpvm_Panel .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(196deg); background-size: 100% 100%; width: 150px; cursor: all-scroll; } #lpvm_Panel .lpvm_button {cursor:pointer;text-align:center; border-bottom:solid gray 1px; color: white;} #lpvm_Panel .pvm_killed {cursor:pointer;text-align:center; border-LGtom:solid gray 1px;text-align:center; color:white;} #lpvm_Panel .gamee_input{text-align:center; border-bottom:solid gray 1px; color: white;} `;
     const html = ` <div id="main_Panel"> <div class="sekcja panel_dragg">ALL FOR ONE</div> <div class='gh_button gh_resp'>PVM<b class='gh_status red'>Off</b></div> <div class='gh_button gh_pvp'>PVP<b class='gh_status red'>Off</b></div> <div class='gh_button gh_lpvm'>Listy<b class='gh_status red'>Off</b></div> <div class='gh_button gh_res'>Zbierajka<b class='gh_status red'>Off</b></div> <div class='gh_button gh_code'>Kody<b class='gh_status red'>Off</b></div> </div> `;
-    const PVP_panel = ` <div id="pvp_Panel"> <div class="sekcja pvp_dragg">PVP</div> <div class='pvp_button pvp_pvp'>PVP<b class='pvp_status red'>Off</b></div> <div class='pvp_button pvp_Code'>Kody<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_WI'>Wojny Imp<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_WK'>Wojny Klanowe<b class='pvp_status green'>On</b></div> <div class='gamee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Lista wojen" name='pvp_capt' value='' /></div> <div class='gameee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Szybkość 10-100" name='speed_capt' value='50' /></div> </div> `;
-    const RESP_panel = ` <div id="resp_Panel"> <div class="sekcja resp_dragg">SPAWN MOBKóW</div> <div class="resp_button resp_resp">RESP<b class="resp_status red">Off</b></div> <div class="resp_button resp_code">Kody<b class="resp_status green">On</b></div> <div class="resp_button resp_sub">Subka<b class="resp_status green">On</b></div> <div class="resp_button resp_ost">Jaka<b class="resp_status green">Ost</b></div> <div class="resp_button resp_multi">Multiwalka<b class="resp_status green">On</b></div> <div class="resp_button resp_ssj">SSJ<b class="resp_status green">On</b></div> <div class="resp_button resp_blue">BLUE<b class="resp_status red">Off</b></div> <div class="resp_button resp_green">GREEN<b class="resp_status red">Off</b></div> <div class="resp_button resp_purple">PURPLE<b class="resp_status red">Off</b></div> <div class="resp_button resp_yellow">YELLOW<b class="resp_status red">Off</b></div> <div class="resp_button resp_red">RED<b class="resp_status red">Off</b></div> <div class="resp_button resp_magic">Wyciąg<b class="resp_status red">Off</b></div> <div class="resp_button resp_bless">BŁOGO<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh1">SMOK<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh2">5% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh3">5% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh4">150K MAX<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh5">5% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh6">5% PSK<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh7">200% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh8">500 LVL<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh9">500% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh10">25% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_on">Włącz All<b class="resp_status green">On</b></div> <div class="resp_button resp_off">Wyłącz All<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh11">100% Limit<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh14">100% Limit<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh12">200% Przyrost<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh13">300% Przyrost<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh15">5% kod<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh16">5 Min cd pvp <b class="resp_status red">Off</b></div> </div> `;
-    const CODE_panel = ` <div id="code_Panel"> <div class="sekcja code_dragg">Kody</div> <div class="code_button code_code">KODY<b class="code_status red">Off</b></div> <div class="code_button code_acc">Konto<b class="code_status red">Off</b></div> <div class="code_button code_zast">Zastępstwa<b class="code_status red">Off</b></div> <label class='select_input'><select id='bot_what_to_train'><option value='1'>Siła</option><option value='2'>Szybkość</option><option value='3'>Wytrzymałość</option><option value='4'>Siła Woli</option><option value='5'>Energia Ki</option><option value='6'>Wtajemniczenie</option></select></label> <label class='select_input'><select id='bot_what_to_traintime'><option value='1'>1 godz.</option><option value='2'>2 godz.</option><option value='3'>3 godz.</option><option value='4'>4 godz.</option><option value='5'>5 godz.</option><option value='6'>6 godz.</option><option value='7'>7 godz.</option><option value='8'>8 godz.</option><option value='9'>9 godz.</option><option value='10'>10 godz.</option><option value='11'>11 godz.</option><option value='12'>12 godz.</option></label> </div> `;
+    const PVP_panel = ` <div id="pvp_Panel"> <div class="sekcja pvp_dragg">PVP</div> <div class='pvp_button pvp_pvp'>PVP<b class='pvp_status red'>Off</b></div> <div class='pvp_button pvp_Code'>Kody<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_WI'>Wojny Imp<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_WK'>Wojny Klanowe<b class='pvp_status green'>On</b></div> <div class='pvp_button pvp_buff_imp'>Bufy IMP<b class='pvp_status red'>Off</b></div> <div class='pvp_button pvp_buff_clan'>Bufy KLAN<b class='pvp_status red'>Off</b></div> <div class='gamee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Lista wojen" name='pvp_capt' value='' /></div> <div class='gameee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Szybkość 10-100" name='speed_capt' value='50' /></div> </div> `;
+    const RESP_panel = ` <div id="resp_Panel"> <div class="sekcja resp_dragg">SPAWN MOBKóW</div> <div class="resp_button resp_resp">RESP<b class="resp_status red">Off</b></div> <div class="resp_button resp_code">Kody<b class="resp_status green">On</b></div> <div class="resp_button resp_sub">Subka<b class="resp_status green">On</b></div> <div class="resp_button resp_ost">Jaka<b class="resp_status green">Ost</b></div> <div class="resp_button resp_multi">Multiwalka<b class="resp_status green">On</b></div> <div class="resp_button resp_ssj">SSJ<b class="resp_status green">On</b></div> <div class="resp_button resp_buff_imp">Bufki IMP<b class="resp_status red">Off</b></div> <div class="resp_button resp_buff_clan">Bufki KLAN<b class="resp_status red">Off</b></div> <div class="resp_button resp_blue">BLUE<b class="resp_status red">Off</b></div> <div class="resp_button resp_green">GREEN<b class="resp_status red">Off</b></div> <div class="resp_button resp_purple">PURPLE<b class="resp_status red">Off</b></div> <div class="resp_button resp_yellow">YELLOW<b class="resp_status red">Off</b></div> <div class="resp_button resp_red">RED<b class="resp_status red">Off</b></div> <div class="resp_button resp_magic">Wyciąg<b class="resp_status red">Off</b></div> <div class="resp_button resp_bless">BŁOGO<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh1">SMOK<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh2">5% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh3">5% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh4">150K MAX<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh5">5% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh6">5% PSK<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh7">200% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh8">500 LVL<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh9">500% EXP<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh10">25% MOC<b class="resp_status red">Off</b></div> <div class="resp_button resp_on">Włącz All<b class="resp_status green">On</b></div> <div class="resp_button resp_off">Wyłącz All<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh11">100% Limit<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh14">100% Limit<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh12">200% Przyrost<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh13">300% Przyrost<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh15">5% kod<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh16">5 Min cd pvp <b class="resp_status red">Off</b></div> <div class="resp_button resp_bh17">15% szybsze zbieranie<b class="resp_status red">Off</b></div> <div class="resp_button resp_bh18">15% więcej szansy na zebranie<b class="resp_status red">Off</b></div> </div> `;
+    const CODE_panel = ` <div id="code_Panel"> <div class="sekcja code_dragg">Kody</div> <div class="code_button code_code">KODY<b class="code_status red">Off</b></div> <div class="code_button code_acc">Konto<b class="code_status red">Off</b></div> <div class="code_button code_zast">Zastępstwa<b class="code_status red">Off</b></div> <div class="code_button code_bh1">Błogo 250% tren<b class="code_status red">Off</b></div> <div class="code_button code_bh2">Błogo 5% kod<b class="code_status red">Off</b></div> <label class='select_input'><select id='bot_what_to_train'><option value='1'>Siła</option><option value='2'>Szybkość</option><option value='3'>Wytrzymałość</option><option value='4'>Siła Woli</option><option value='5'>Energia Ki</option><option value='6'>Wtajemniczenie</option></select></label> <label class='select_input'><select id='bot_what_to_traintime'><option value='1'>1 godz.</option><option value='2'>2 godz.</option><option value='3'>3 godz.</option><option value='4'>4 godz.</option><option value='5'>5 godz.</option><option value='6'>6 godz.</option><option value='7'>7 godz.</option><option value='8'>8 godz.</option><option value='9'>9 godz.</option><option value='10'>10 godz.</option><option value='11'>11 godz.</option><option value='12'>12 godz.</option></label> </div> `;
     const RES_panel = ` <div id="res_Panel"> <div class="sekcja res_dragg">SUROWCE</div> <div class="res_button res_res">ZBIERAJ<b class="res_status red">Off</b></div> <div class="bt_cool" style="text-align:center; color:white;"></div> <ul></ul> </div> `;
     const LPVM_panel = ` <div id="lpvm_Panel"> <div class="sekcja lpvm_dragg">LISTY GOŃCZE</div> <div class='pvm_killed'>Wykonane listy: <b>0</b></div> <div class="lpvm_button lpvm_lpvm">START<b class="lpvm_status red">Off</b></div> <div class="lpvm_button lpvm_g">G-Born<b class="lpvm_status red">Off</b></div> <div class="lpvm_button lpvm_u">U-Bron<b class="lpvm_status red">Off</b></div> <div class="lpvm_button lpvm_s">S-Bron<b class="lpvm_status red">Off</b></div> <div class="lpvm_button lpvm_h">H-Born<b class="lpvm_status red">Off</b></div> <div class="lpvm_button lpvm_limit">Limit<b class="lpvm_status red">Off</b></div> <div class='gamee_input'><input style='width:120px; margin-left:-2px; background:grey;text-align:center;font-size:16;' type='text' placeholder="Enter text" name='lpvm_capt' value='60' /></div> </div> `;
     $("body").append(`<style>${css}</style>${html}`);
@@ -133,6 +133,26 @@ function createPanel() {
             PVP.wi = true;
         }
     });
+    if (GAME.server != '20') {
+        $('#pvp_Panel .pvp_buff_imp').click(() => {
+            if (PVP.buff_imp) {
+                $(".pvp_buff_imp .pvp_status").removeClass("green").addClass("red").html("Off");
+                PVP.buff_imp = false;
+            } else {
+                $(".pvp_buff_imp .pvp_status").removeClass("red").addClass("green").html("On");
+                PVP.buff_imp = true;
+            }
+        });
+        $('#pvp_Panel .pvp_buff_clan').click(() => {
+            if (PVP.buff_clan) {
+                $(".pvp_buff_clan .pvp_status").removeClass("green").addClass("red").html("Off");
+                PVP.buff_clan = false;
+            } else {
+                $(".pvp_buff_clan .pvp_status").removeClass("red").addClass("green").html("On");
+                PVP.buff_clan = true;
+            }
+        });
+    }
     $('#pvp_Panel .pvp_WK').click(() => {
         if (PVP.wk) {
             $(".pvp_WK .pvp_status").removeClass("green").addClass("red").html("Off");
@@ -173,6 +193,7 @@ function createPanel() {
             PVP.stop = true;
             LPVM.Stop = true;
             CODE.stop = true;
+            RESP.loc = GAME.char_data.loc;
             $(".code_code .code_status").removeClass("green").addClass("red").html("Off");
             $(".lpvm_lpvm .lpvm_status").removeClass("green").addClass("red").html("Off");
             $(".pvp_pvp .pvp_status").removeClass("green").addClass("red").html("Off");
@@ -422,6 +443,26 @@ function createPanel() {
         RESP.b9 = false;
         RESP.b10 = false;
     });
+    if (GAME.server != '20') {
+        $('#resp_Panel .resp_buff_imp').click(() => {
+            if (RESP.buff_imp) {
+                $(".resp_buff_imp .resp_status").removeClass("green").addClass("red").html("Off");
+                RESP.buff_imp = false;
+            } else {
+                $(".resp_buff_imp .resp_status").removeClass("red").addClass("green").html("On");
+                RESP.buff_imp = true;
+            }
+        });
+        $('#resp_Panel .resp_buff_clan').click(() => {
+            if (RESP.buff_clan) {
+                $(".resp_buff_clan .resp_status").removeClass("green").addClass("red").html("Off");
+                RESP.buff_clan = false;
+            } else {
+                $(".resp_buff_clan .resp_status").removeClass("red").addClass("green").html("On");
+                RESP.buff_clan = true;
+            }
+        });
+    }
     $('#resp_Panel .resp_bh1').click(() => {
         if (RESP.b1) {
             $(".resp_bh1 .resp_status").removeClass("green").addClass("red").html("Off");
@@ -566,6 +607,24 @@ function createPanel() {
             RESP.b16 = true;
         }
     });
+    $('#resp_Panel .resp_bh17').click(() => {
+        if (RESP.b17) {
+            $(".resp_bh17 .resp_status").removeClass("green").addClass("red").html("Off");
+            RESP.b17 = false;
+        } else {
+            $(".resp_bh17 .resp_status").removeClass("red").addClass("green").html("On");
+            RESP.b17 = true;
+        }
+    });
+    $('#resp_Panel .resp_bh18').click(() => {
+        if (RESP.b18) {
+            $(".resp_bh18 .resp_status").removeClass("green").addClass("red").html("Off");
+            RESP.b18 = false;
+        } else {
+            $(".resp_bh18 .resp_status").removeClass("red").addClass("green").html("On");
+            RESP.b18 = true;
+        }
+    });
     $('#lpvm_Panel .lpvm_lpvm').click(() => {
         if (LPVM.Stop) {
             $(".lpvm_lpvm .lpvm_status").removeClass("red").addClass("green").html("On");
@@ -669,6 +728,7 @@ function createPanel() {
             PVP.stop = true;
             LPVM.Stop = true;
             CODE.stop = true;
+            RES.loc = GAME.char_data.loc;
             $(".code_code .code_status").removeClass("green").addClass("red").html("Off");
             $(".lpvm_lpvm .lpvm_status").removeClass("green").addClass("red").html("Off");
             $(".pvp_pvp .pvp_status").removeClass("green").addClass("red").html("Off");
@@ -699,6 +759,11 @@ function createPanel() {
             $(".code_code .code_status").removeClass("red").addClass("green").html("On");
             CODE.stop = false;
             CODE.start();
+            GAME.socket.emit('ga', {
+                a: 12,
+                page: 10,
+                used: 1
+            });
             RESP.stop = true;
             RES.stop = true;
             LPVM.Stop = true;
@@ -718,7 +783,11 @@ function createPanel() {
             CODE.acc = false;
         } else {
             $(".code_acc .code_status").removeClass("red").addClass("green").html("On");
+            $(".code_bh1 .code_status").removeClass("green").addClass("red").html("Off");
+            $(".code_bh2 .code_status").removeClass("green").addClass("red").html("Off");
             CODE.acc = true;
+            CODE.b1 = false;
+            CODE.b2 = false;
         }
     });
     $('#code_Panel .code_zast').click(() => {
@@ -727,7 +796,37 @@ function createPanel() {
             CODE.zast = false;
         } else {
             $(".code_zast .code_status").removeClass("red").addClass("green").html("On");
+            $(".code_bh1 .code_status").removeClass("green").addClass("red").html("Off");
+            $(".code_bh2 .code_status").removeClass("green").addClass("red").html("Off");
             CODE.zast = true;
+            CODE.b1 = false;
+            CODE.b2 = false;
+        }
+    });
+    $('#code_Panel .code_bh1').click(() => {
+        if (CODE.b1) {
+            $(".code_bh1 .code_status").removeClass("green").addClass("red").html("Off");
+            CODE.b1 = false;
+        } else {
+            $(".code_bh1 .code_status").removeClass("red").addClass("green").html("On");
+            $(".code_acc .code_status").removeClass("green").addClass("red").html("Off");
+            $(".code_zast .code_status").removeClass("green").addClass("red").html("Off");
+            CODE.b1 = true;
+            CODE.acc = false;
+            CODE.zast = false;
+        }
+    });
+    $('#code_Panel .code_bh2').click(() => {
+        if (CODE.b2) {
+            $(".code_bh2 .code_status").removeClass("green").addClass("red").html("Off");
+            CODE.b2 = false;
+        } else {
+            $(".code_bh2 .code_status").removeClass("red").addClass("green").html("On");
+            $(".code_acc .code_status").removeClass("green").addClass("red").html("Off");
+            $(".code_zast .code_status").removeClass("green").addClass("red").html("Off");
+            CODE.b2 = true;
+            CODE.acc = false;
+            CODE.zast = false;
         }
     });
     $('#bot_what_to_train').change((e) => {
@@ -807,9 +906,18 @@ var PVP = {
     tabb: [],
     x: 1,
     y: 1,
-    war: false
+    war: false,
+    buff_imp: false,
+    buff_clan: false
 };
 PVP.checkkkk = () => {
+    let imp = $("#leader_player").find("[data-option=show_player]").attr("data-char_id");
+    let emp = GAME.char_data.empire;
+    let buff = $(".emp_buff .pull-right").find("button").attr("data-option") == "activate_emp_buff";
+    let buff_id = $(".emp_buff .pull-right").find("button").attr("data-buff");
+    let who_win = $("#gne_satus").text().includes("ZŁO");
+    let abut = $("#clan_buffs").find(`button[data-option="activate_war_buff"]`);
+    let isDisabled = $("#clan_buffs").find(`button[data-option="activate_war_buff"]`).parents("tr").hasClass("disabled");
     if (GAME.quick_opts.ssj && $("#ssj_bar").css("display") === "none" && PVP.code) {
         setTimeout(() => {
             GAME.socket.emit('ga', {
@@ -830,21 +938,19 @@ PVP.checkkkk = () => {
     } else if ($('#ssj_status').text() <= '00:00:05' && PVP.code && GAME.quick_opts.ssj) {
         return true;
     } else if ($("#train_uptime").find('.timer').length == 0 && !GAME.is_training && PVP.code) {
-        setTimeout(() => {
-            GAME.socket.emit('ga', {
-                a: 8,
-                type: 2,
-                stat: 1,
-                duration: 1
-            });
-        }, 1500);
+        GAME.socket.emit('ga', {
+            a: 8,
+            type: 2,
+            stat: 1,
+            duration: 1
+        });
         setTimeout(() => {
             GAME.socket.emit('ga', {
                 a: 8,
                 type: 5,
                 apud: 'vzaaa'
             });
-        }, 2700);
+        }, 1600);
         return true;
     } else if (GAME.is_training && $("#train_uptime").find('.timer').length == 1 && PVP.code) {
         setTimeout(() => {
@@ -854,11 +960,57 @@ PVP.checkkkk = () => {
             });
         }, 1600);
         return true;
-    } else if (GAME.is_training && RESP.code) {
+    } else if (GAME.is_training && PVP.code) {
         GAME.socket.emit('ga', {
             a: 8,
             type: 3
         });
+        return true;
+    } else if (imp == GAME.char_id && PVP.buff_imp && buff && buff_id < 4) {
+        GAME.socket.emit('ga', {
+            a: 50,
+            type: 6,
+            buff: buff_id
+        });
+        return true;
+    } else if (imp == GAME.char_id && PVP.buff_imp && buff && buff_id < 7 && ((emp == 1 || emp == 3) && who_win)) {
+        GAME.socket.emit('ga', {
+            a: 50,
+            type: 6,
+            buff: buff_id
+        });
+        return true;
+    } else if (imp == GAME.char_id && PVP.buff_imp && buff && buff_id < 7 && ((emp == 2 || emp == 4) && !who_win)) {
+        GAME.socket.emit('ga', {
+            a: 50,
+            type: 6,
+            buff: buff_id
+        });
+        return true;
+    } else if ((PVP.buff_clan || PVP.buff_imp) && $("#server_time").text() > '00:05:00' && $("#server_time").text() < '01:00:00' && typeof this.loaded == 'undefined') {
+        this.loaded = true;
+        setTimeout(() => {
+            GAME.socket.emit('ga', {
+                a: 50,
+                type: 0,
+                empire: GAME.char_data.empire
+            });
+        }, 300);
+        setTimeout(() => {
+            GAME.emitOrder({
+                a: 39,
+                type: 0
+            });
+        }, 600);
+        setTimeout(() => {
+            GAME.emitOrder({
+                a: 39,
+                type: 23
+            });
+        }, 900);
+        return true;
+    } else if (PVP.buff_clan && GAME.klan_data != undefined && abut.length && !isDisabled) {
+        $(" .newBtn.activate_all_clan_buffs").click();
         return true;
     }
     return false;
@@ -1171,7 +1323,7 @@ PVP.cofanie = () => {
             dir: 7,
             vo: GAME.map_options.vo
         });
-        window.setTimeout(PVP.cofanie, 150 / PVP.WSPP());
+        window.setTimeout(PVP.cofanie, 150);
     }
 };
 PVP.prawodol = () => {
@@ -1231,7 +1383,7 @@ PVP.check = () => {
 };
 PVP.check2 = () => {
     if (PVP.checkkkk()) {
-        window.setTimeout(PVP.check2, 3700);
+        window.setTimeout(PVP.check2, 1800);
     } else {
         window.setTimeout(PVP.start, PVP.wait / PVP.WSPP());
     }
@@ -1279,7 +1431,7 @@ PVP.WSPP = () => {
     return speed / 50;
 };
 var RESP = {
-    wait: 10,
+    wait: 15,
     stop: true,
     checkOST: true,
     checkSSJ: true,
@@ -1296,10 +1448,12 @@ var RESP = {
     CONF_BLUE_AMOUNT: () => {
         return Math.floor(GAME.getCharMaxPr() / 100 * 0.7)
     },
+    CONF_BLUE_AMOUNT1: Math.floor(GAME.getCharMaxPr() / 100 * 0.7),
     CONF_PURPLE_AMOUNT: 20,
     CONF_GREEN_AMOUNT: () => {
         return Math.floor(GAME.getCharMaxPr() / 2000 * 0.7)
     },
+    CONF_GREEN_AMOUNT1: Math.floor(GAME.getCharMaxPr() / 2000 * 0.7),
     CONF_YELLOW_AMOUNT: 4,
     CONF_SENZU: false,
     bless: false,
@@ -1320,9 +1474,21 @@ var RESP = {
     b13: false,
     b14: false,
     b15: false,
-    b16: false
+    b16: false,
+    b17: false,
+    b18: false,
+    buff_imp: false,
+    buff_clan: false,
+    loc: GAME.char_data.loc
 };
 RESP.check = () => {
+    let imp = $("#leader_player").find("[data-option=show_player]").attr("data-char_id");
+    let emp = GAME.char_data.empire;
+    let buff = $(".emp_buff .pull-right").find("button").attr("data-option") == "activate_emp_buff";
+    let buff_id = $(".emp_buff .pull-right").find("button").attr("data-buff");
+    let who_win = $("#gne_satus").text().includes("ZŁO");
+    let abut = $("#clan_buffs").find(`button[data-option="activate_war_buff"]`);
+    let isDisabled = $("#clan_buffs").find(`button[data-option="activate_war_buff"]`).parents("tr").hasClass("disabled");
     if (GAME.char_data.pr <= RESP.min_pa()) {
         RESP.useSenzu();
         return true;
@@ -1370,7 +1536,14 @@ RESP.check = () => {
             });
         }, 1600);
         return true;
-                } else if (GAME.is_training && $("#train_uptime").find('.timer').length == 1 && RESP.code) {
+    } else if (GAME.is_training && $("#train_uptime").find('.timer').length == 0 && RESP.code) {
+        GAME.socket.emit('ga', {
+            a: 8,
+            type: 5,
+            apud: 'vzaaa'
+        });
+        return true;
+    } else if (GAME.is_training && $("#train_uptime").find('.timer').length == 1 && RESP.code) {
         GAME.socket.emit('ga', {
             a: 8,
             type: 3
@@ -1381,6 +1554,52 @@ RESP.check = () => {
             a: 8,
             type: 3
         });
+        return true;
+    } else if (imp == GAME.char_id && RESP.buff_imp && buff && buff_id < 4) {
+        GAME.socket.emit('ga', {
+            a: 50,
+            type: 6,
+            buff: buff_id
+        });
+        return true;
+    } else if (imp == GAME.char_id && RESP.buff_imp && buff && buff_id < 7 && ((emp == 1 || emp == 3) && who_win)) {
+        GAME.socket.emit('ga', {
+            a: 50,
+            type: 6,
+            buff: buff_id
+        });
+        return true;
+    } else if (imp == GAME.char_id && RESP.buff_imp && buff && buff_id < 7 && ((emp == 2 || emp == 4) && !who_win)) {
+        GAME.socket.emit('ga', {
+            a: 50,
+            type: 6,
+            buff: buff_id
+        });
+        return true;
+    } else if ((RESP.buff_clan || RESP.buff_imp) && $("#server_time").text() > '00:05:00' && $("#server_time").text() < '01:00:00' && typeof this.loaded == 'undefined') {
+        this.loaded = true;
+        setTimeout(() => {
+            GAME.socket.emit('ga', {
+                a: 50,
+                type: 0,
+                empire: GAME.char_data.empire
+            });
+        }, 300);
+        setTimeout(() => {
+            GAME.emitOrder({
+                a: 39,
+                type: 0
+            });
+        }, 600);
+        setTimeout(() => {
+            GAME.emitOrder({
+                a: 39,
+                type: 23
+            });
+        }, 900);
+        return true;
+    } else if (RESP.buff_clan && GAME.klan_data != undefined && abut.length && !isDisabled) {
+        $(" .newBtn.activate_all_clan_buffs").click();
         return true;
     }
     return false;
@@ -1450,17 +1669,19 @@ RESP.reload_map = () => {
 };
 RESP.MF = () => {
     var r = 0;
-    for (i = 0; i < GAME.map_options.ma.length; i++) {
-        if (GAME.map_options.ma[i] === 1) {
-            r += parseInt(GAME.field_mobs[0].ranks[i]);
-            if (GAME.field_mobs[1]) {
-                r += parseInt(GAME.field_mobs[1].ranks[i]);
-            }
-            if (GAME.field_mobs[2]) {
-                r += parseInt(GAME.field_mobs[2].ranks[i]);
-            }
-            if (GAME.field_mobs[3]) {
-                r += parseInt(GAME.field_mobs[3].ranks[i]);
+    if (GAME.field_mobs) {
+        for (i = 0; i < GAME.map_options.ma.length; i++) {
+            if (GAME.map_options.ma[i] === 1) {
+                r += parseInt(GAME.field_mobs[0].ranks[i]);
+                if (GAME.field_mobs[1]) {
+                    r += parseInt(GAME.field_mobs[1].ranks[i]);
+                }
+                if (GAME.field_mobs[2]) {
+                    r += parseInt(GAME.field_mobs[2].ranks[i]);
+                }
+                if (GAME.field_mobs[3]) {
+                    r += parseInt(GAME.field_mobs[3].ranks[i]);
+                }
             }
         }
     }
@@ -1500,6 +1721,8 @@ RESP.check_bless = () => {
     var błogo14 = $("#ekw_page_items").find("div[data-base_item_id=1752]").attr("data-item_id");
     var błogo15 = $("#ekw_page_items").find("div[data-base_item_id=1751]").attr("data-item_id");
     var błogo16 = $("#ekw_page_items").find("div[data-base_item_id=1742]").attr("data-item_id");
+    var błogo17 = $("#ekw_page_items").find("div[data-base_item_id=1747]").attr("data-item_id");
+    var błogo18 = $("#ekw_page_items").find("div[data-base_item_id=1746]").attr("data-item_id");
     if (GAME.ekw_page != 10) {
         GAME.ekw_page = 10;
         GAME.socket.emit('ga', {
@@ -1636,6 +1859,22 @@ RESP.check_bless = () => {
             page: 10
         });
         return true;
+    } else if (($("#char_buffs").find("[data-buff=76]").length != 1 || $("#char_buffs").find("[data-buff=76]").find(".timer").text() <= '00:00:04') && RESP.b17 && błogo17) {
+        GAME.socket.emit('ga', {
+            a: 12,
+            type: 14,
+            iid: parseInt(błogo17),
+            page: 10
+        });
+        return true;
+    } else if (($("#char_buffs").find("[data-buff=75]").length != 1 || $("#char_buffs").find("[data-buff=75]").find(".timer").text() <= '00:00:04') && RESP.b18 && błogo18) {
+        GAME.socket.emit('ga', {
+            a: 12,
+            type: 14,
+            iid: parseInt(błogo18),
+            page: 10
+        });
+        return true;
     }
     return false;
 };
@@ -1665,7 +1904,7 @@ RESP.useSenzu = () => {
     const red = RESP.getSenzu(RESP.SENZU_RED);
     switch (RESP.CONF_SENZU) {
         case RESP.SENZU_BLUE:
-            RESP.useBlue(Math.min(RESP.CONF_BLUE_AMOUNT(), blue.stack));
+            RESP.useBlue(Math.min(RESP.CONF_BLUE_AMOUNT(), blue.stack, RESP.CONF_BLUE_AMOUNT1));
             break;
         case RESP.SENZU_PURPLE:
             RESP.usePurple(Math.min(RESP.CONF_PURPLE_AMOUNT, purple.stack));
@@ -1674,7 +1913,7 @@ RESP.useSenzu = () => {
             RESP.useMagic();
             break;
         case RESP.SENZU_GREEN:
-            RESP.useGreen(Math.min(RESP.CONF_GREEN_AMOUNT(), green.stack));
+            RESP.useGreen(Math.min(RESP.CONF_GREEN_AMOUNT(), green.stack, RESP.CONF_GREEN_AMOUNT1));
             break;
         case RESP.SENZU_YELLOW:
             RESP.useYellow(Math.min(RESP.CONF_YELLOW_AMOUNT, yellow.stack));
@@ -1683,8 +1922,8 @@ RESP.useSenzu = () => {
             RESP.useRed();
             break;
         default:
-            if (blue && blue.stack > RESP.CONF_BLUE_AMOUNT() * 20) RESP.useBlue(Math.min(RESP.CONF_BLUE_AMOUNT(), blue.stack));
-            else if (green && green.stack > RESP.CONF_GREEN_AMOUNT() * 5) RESP.useGreen(Math.min(RESP.CONF_GREEN_AMOUNT(), green.stack));
+            if (blue && blue.stack > RESP.CONF_BLUE_AMOUNT() * 20) RESP.useBlue(Math.min(RESP.CONF_BLUE_AMOUNT(), blue.stack, RESP.CONF_BLUE_AMOUNT1));
+            else if (green && green.stack > RESP.CONF_GREEN_AMOUNT() * 5) RESP.useGreen(Math.min(RESP.CONF_GREEN_AMOUNT(), green.stack, RESP.CONF_GREEN_AMOUNT1));
             else if (red && red.stack > 0) RESP.useRed();
     }
 };
@@ -2002,7 +2241,8 @@ var RES = {
     speed: 100,
     mined_id: [],
     refresh_mines: true,
-    first_mine: []
+    first_mine: [],
+    loc: GAME.char_data.loc
 };
 RES.emitOrder = function(data) {
     if (!this.processing) {
@@ -2029,7 +2269,7 @@ RES.Start = function() {
     }, 120);
 };
 RES.Action = function() {
-    this.stop = false;
+    RES.stop = false;
     if (!this.processing) {
         this.Go();
     } else {
@@ -2039,7 +2279,7 @@ RES.Action = function() {
     }
 };
 RES.GetCooldown = function() {
-    if (GAME.map_mines.coords[parseInt(GAME.char_data.x) + "_" + parseInt(GAME.char_data.y)][0][2] > 0) {
+    if (Object.entries(GAME.map_mines.mine_data).length > 0 && GAME.map_mines.coords[parseInt(GAME.char_data.x) + "_" + parseInt(GAME.char_data.y)][0][2] > 0) {
         cd = GAME.map_mines.coords[parseInt(GAME.char_data.x) + "_" + parseInt(GAME.char_data.y)][0][2] - GAME.getTime();
         cd += 5;
         r = cd * 1000;
@@ -2136,26 +2376,28 @@ RES.Go = function() {
             }
         });
         this.finder.calculate();
-    } else if (!this.stop && (GAME.char_data.x + "_" + GAME.char_data.y) == this.last_mine) {
+    } else if (!RES.stop && (GAME.char_data.x + "_" + GAME.char_data.y) == this.last_mine) {
         setTimeout(function() {
             RES.Mine();
         }, 1200);
         this.cdt = setTimeout(function() {
-            GAME.loadMapJson(function() {
-                GAME.socket.emit('ga', {
-                    a: 3,
-                    vo: GAME.map_options.vo
-                }, 1);
-            });
-            setTimeout(function() {
-                RES.Start();
-            }, 2400);
-            $(".bt_cool").html("");
+            if (!RES.stop) {
+                GAME.loadMapJson(function() {
+                    GAME.socket.emit('ga', {
+                        a: 3,
+                        vo: GAME.map_options.vo
+                    }, 1);
+                });
+                setTimeout(function() {
+                    RES.Start();
+                }, 2400);
+                $(".bt_cool").html("");
+            }
         }, this.GetCooldown());
     }
 };
 RES.Move = function() {
-    if (!this.stop) {
+    if (!RES.stop) {
         if (this.path[0].x > GAME.char_data.x - 1 && this.path[0].y == GAME.char_data.y - 1) {
             GAME.socket.emit('ga', {
                 a: 4,
@@ -2223,14 +2465,24 @@ RES.Next = function() {
     }
 };
 RES.HandleResponse = function(res) {
-    if (this.stop && res.a === 3 && PVP.stop && LPVM.Stop && RESP.stop && CODE.stop) {
+    if (RES.stop && res.a === 3 && PVP.stop && LPVM.Stop && RESP.stop && CODE.stop) {
         this.listMines();
         this.getMinesPos();
     }
+    if (res.a === 3 && RES.loc != GAME.char_data.loc) {
+        RES.stop = true;
+        $(".res_res .res_status").removeClass("green").addClass("red").html("Off");
+        $(".bt_cool").html("");
+        clearTimeout(RES.cdt);
+    }
+    if (res.a === 3 && RESP.loc != GAME.char_data.loc) {
+        RESP.stop = true;
+        $(".resp_resp .resp_status").removeClass("green").addClass("red").html("Off");
+    }
     this.processing = false;
-    if (!this.stop && res.a === 4 && res.char_id === GAME.char_id) {
+    if (!RES.stop && res.a === 4 && res.char_id === GAME.char_id) {
         RES.Next();
-    } else if (!this.stop && res.done && res.a === 22) {
+    } else if (!RES.stop && res.done && res.a === 22) {
         $("button[data-option='start_mine']").remove();
         RES.Go();
     }
@@ -2264,7 +2516,9 @@ var CODE = {
     wait: 2000,
     checkSSJ: true,
     acc: false,
-    zast: false
+    zast: false,
+    b1: false,
+    b2: false
 };
 CODE.start = () => {
     if (!CODE.stop) {
@@ -2334,7 +2588,24 @@ CODE.use_char = () => {
     }
 };
 CODE.kodyy = () => {
-    if ($("#train_uptime").find('.timer').length == 0) {
+    let błogo2 = $("#ekw_page_items").find("div[data-base_item_id=1751]").attr("data-item_id");
+    if (GAME.ekw_page != 10 && !CODE.acc && !CODE.zast) {
+        GAME.ekw_page = 10;
+        GAME.socket.emit('ga', {
+            a: 12,
+            page: 10,
+            used: 1
+        });
+        window.setTimeout(CODE.kodyy, CODE.wait);
+    } else if ($("#char_buffs").find("[data-buff=80]").length != 1 && $("#train_uptime").find('.timer').length == 0 && błogo2 && CODE.b2 && !CODE.acc && !CODE.zast && !CODE.stop) {
+        GAME.socket.emit('ga', {
+            a: 12,
+            type: 14,
+            iid: parseInt(błogo2),
+            page: 10
+        });
+        window.setTimeout(CODE.kodyy, CODE.wait);
+    } else if ($("#train_uptime").find('.timer').length == 0) {
         GAME.socket.emit('ga', {
             a: 8,
             type: 5,
@@ -2374,8 +2645,25 @@ CODE.checkTR = () => {
     } else window.setTimeout(CODE.start, CODE.wait);
 };
 CODE.tren = () => {
+    let błogo1 = $("#ekw_page_items").find("div[data-base_item_id=1629]").attr("data-item_id");
     if (GAME.is_training) {
         window.setTimeout(CODE.start, CODE.wait);
+    } else if (GAME.ekw_page != 10 && !CODE.acc && !CODE.zast) {
+        GAME.ekw_page = 10;
+        GAME.socket.emit('ga', {
+            a: 12,
+            page: 10,
+            used: 1
+        });
+        window.setTimeout(CODE.tren, CODE.wait);
+    } else if ($("#char_buffs").find("[data-buff=54]").length != 1 && !GAME.is_training && błogo1 && CODE.b1 && !CODE.acc && !CODE.zast && !CODE.stop) {
+        GAME.socket.emit('ga', {
+            a: 12,
+            type: 14,
+            iid: parseInt(błogo1),
+            page: 10
+        });
+        window.setTimeout(CODE.tren, CODE.wait);
     } else {
         GAME.socket.emit('ga', {
             a: 8,
@@ -2387,3 +2675,22 @@ CODE.tren = () => {
     }
 };
 createPanel();
+setTimeout(() => {
+    GAME.socket.emit('ga', {
+        a: 50,
+        type: 0,
+        empire: GAME.char_data.empire
+    });
+}, 300);
+setTimeout(() => {
+    GAME.emitOrder({
+        a: 39,
+        type: 0
+    });
+}, 600);
+setTimeout(() => {
+    GAME.emitOrder({
+        a: 39,
+        type: 23
+    });
+}, 900);

@@ -1,4 +1,4 @@
-// From this key: l5srCTnwrWHds3k 
+// z klucza: l5srCTnwrWHds3k 
 
 var checked = true;
 if (typeof GAME === 'undefined') {} else {
@@ -60,6 +60,7 @@ if (typeof GAME === 'undefined') {} else {
                 this.addToCSS(`#kws_spawn{ background: rgba(0,0,0,0.9); position: absolute; top: -250px;left: -210px; z-index: 9999; width: 200px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #kws_spawn .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(150deg); background-size: 100% 100%; width: 200px; cursor: all-scroll; } #kws_spawn .spawn_row{border-bottom:solid gray 1px; color: white; font-size: 13px; display: flex; padding:4px;}`);
                 $("#map_canvas_container").append(`<div id="kws_spawn"> <div class="sekcja"><img src="/gfx/layout/war.png" class="spawn_switch">USTAWIENIA SPAWNU</div><div id="kws_spawn2" style="">${this.spawnList()}</div>`);
                 this.addToCSS(`.spawn_switch{cursor:pointer;}`);
+                this.addToCSS(`.quest_roll1{position:absolute; width:50px; height:50px; background:url('/gfx/layout/dice.png') 0 0; top:-25px; left:25px; cursor:pointer; filter:drop-shadow(0px 0px 10px lime)} .quest_roll2{position:absolute; width:50px; height:50px; background:url('/gfx/layout/dice.png') 0 0; top:-25px; left:75px; cursor:pointer; filter:drop-shadow(0px 0px 10px #00fdff)} .quest_roll3{position:absolute; width:50px; height:50px; background:url('/gfx/layout/dice.png') 0 0; top:-25px; left:125px; cursor:pointer; filter:drop-shadow(0px 0px 10px #ff0000)} .quest_roll:hover{background:url('/gfx/layout/dice.png') 0 -45px;} .quest_roll1:hover{background:url('/gfx/layout/dice.png') 0 -45px;} .quest_roll2:hover{background:url('/gfx/layout/dice.png') 0 -45px;} .quest_roll3:hover{background:url('/gfx/layout/dice.png') 0 -45px;}`);
                 $("#top_bar").append(`<div class="kws_top_bar"></div>`);
                 $("#bless_type_2").click();
                 $(`.channel_opts .option.chat_icon.load`).addClass('better_chat_loading').removeAttr('id').removeAttr('data-option');
@@ -100,7 +101,7 @@ if (typeof GAME === 'undefined') {} else {
                         cb(data);
                     })
                     .catch((error) => {
-                        console.error("Błąd podczas pobierania danych z GitHub:", error);
+                        console.error("Fetch data error:", error);
                     });
             }
             solveRiddle(r_id) {
@@ -319,6 +320,15 @@ if (typeof GAME === 'undefined') {} else {
                     setTimeout(() => {
                         $('#fight_view').fadeOut();
                     }, 2000);
+                    setTimeout(() => {
+                        if ((GAME.char_data.reborn == 4 || GAME.char_data.reborn == 5) && GAME.char_data.alt_transform_expiry < GAME.getTime()) {
+                            GAME.socket.emit('ga', {
+                                a: 18,
+                                type: 8,
+                                tech_id: 134
+                            });
+                        }
+                    }, 3000);
                 }
             }
             manageAutoArena() {
@@ -405,7 +415,7 @@ if (typeof GAME === 'undefined') {} else {
                     setTimeout(() => {
                         this.activateAllClanBuffs();
                     }, 200);
-                } else if (acpbut.length) {
+                } else if (acpbut.length && $("#clan_planet_buffs .red").eq(0).text() == 0) {
                     GAME.socket.emit('ga', {
                         a: 39,
                         type: 29
@@ -675,7 +685,7 @@ if (typeof GAME === 'undefined') {} else {
                 $("#secondary_char_stats .instance ul").html(instance);
                 let activities = `${activity}/185 (${received}/5)`;
                 $("#secondary_char_stats .activities ul").html(activities);
-                let innerHTML = ` <span class='kws_top_bar_section sk_info' style='cursor:pointer;'>SK: <span>${sk_status}</span></span> <span class='kws_top_bar_section train_upgr_info' style='cursor:pointer;'>KODY: <span>${train_upgr}</span></span><span class='kws_top_bar_section lvl' style='cursor:pointer;'>LVL: <span>${lvlh}/H</span></span><span class='kws_top_bar_section pvp' style='cursor:pointer;'>PVP: <span>${pvp_count}</span></span><span class='kws_top_bar_section arena' style='cursor:pointer;'>ARENA: <span>${arena_count}</span></span> ${is_trader.getDay() == 6 ? trader : ''}<span class='kws_top_bar_section version' style='cursor:pointer;'>Wersja: <span>${version}</span></span> `;
+                let innerHTML = ` <span class='kws_top_bar_section sk_info' style='cursor:pointer;'>SK: <span style="color:${sk_status == "AKTYWNE" ? "lime" : "white"};">${sk_status}</span></span> <span class='kws_top_bar_section train_upgr_info' style='cursor:pointer;'>KODY: <span style="color:${train_upgr == "AKTYWNE" ? "lime" : "white"};">${train_upgr}</span></span><span class='kws_top_bar_section lvl' style='cursor:pointer;'>LVL: <span>${lvlh}/H</span></span><span class='kws_top_bar_section pvp' style='cursor:pointer;'>PVP: <span>${pvp_count}</span></span><span class='kws_top_bar_section arena' style='cursor:pointer;'>ARENA: <span>${arena_count}</span></span> ${is_trader.getDay() == 6 ? trader : ''}<span class='kws_top_bar_section version' style='cursor:pointer;'>Wersja: <span>${version}</span></span> `;
                 $(".kws_top_bar").html(innerHTML);
             }
             collectActivities() {
@@ -863,6 +873,14 @@ if (typeof GAME === 'undefined') {} else {
                             button: 3,
                             id: qb_id
                         });
+                    } else if ($("button[data-option=finish_quest]").length === 2 && $("button[data-option=finish_quest]").eq(1).html() === "Mam dość tej studni") {
+                        let qb_id = $("button[data-option=finish_quest]").eq(1).attr("data-qb_id");
+                        GAME.socket.emit('ga', {
+                            a: 22,
+                            type: 2,
+                            button: 2,
+                            id: qb_id
+                        });
                     } else if ($("#field_opts_con .sekcja").html() == "Zasoby") {
                         let qb_id = $("#field_opts_con .field_option").find("[data-option=start_mine]").attr("data-mid");
                         GAME.socket.emit('ga', {
@@ -1017,6 +1035,23 @@ if (typeof GAME === 'undefined') {} else {
                         $("#clan_inner_stelep").css("cssText", `display:block;position:absolute;padding:10px;border:solid #003e60 2px;background:rgb(5 21 36 / 97%);z-index:9999;border-radius:5px;margin-top:85px;`);
                     } else {
                         $("#clan_inner_stelep").attr("style", "display:none;");
+                    }
+                });
+                $("body").on("click", "#changeProfile", () => {
+                    if ($("#resp_Panel .resp_status").eq(0).hasClass("green")) {
+                        $("#resp_Panel .resp_button.resp_resp").click();
+                    }
+                    if ($("#pvp_Panel .pvp_status").eq(0).hasClass("green")) {
+                        $("#pvp_Panel .pvp_button.pvp_pvp").click();
+                    }
+                    if ($("#lpvm_Panel .lpvm_status").eq(0).hasClass("green")) {
+                        $("#lpvm_Panel .lpvm_button.lpvm_lpvm").click();
+                    }
+                    if ($("#res_Panel .res_status").eq(0).hasClass("green")) {
+                        $("#res_Panel .res_button.res_res").click();
+                    }
+                    if ($(".manage_autoExpeditions").eq(0).hasClass("kws_active_icon")) {
+                        $(".manage_autoExpeditions").click();
                     }
                 });
                 $("body").on("click", `button[data-page="stelep"].cps`, () => {
@@ -1259,28 +1294,22 @@ if (typeof GAME === 'undefined') {} else {
                                 type: 46,
                                 rent: 3
                             });
-                        } else if (event.key === "8") {
-                            roll1 = true;
-                            GAME.socket.emit('ga', {
-                                a: 22,
-                                type: 1,
-                                id: parseInt($(".quest_roll.option").attr("data-qb_id"))
-                            });
-                        } else if (event.key === "9") {
-                            roll = true;
-                            GAME.socket.emit('ga', {
-                                a: 22,
-                                type: 1,
-                                id: parseInt($(".quest_roll.option").attr("data-qb_id"))
-                            });
                         } else if (event.key === "7") {
-                            roll2 = true;
                             GAME.socket.emit('ga', {
-                                a: 22,
-                                type: 1,
-                                id: parseInt($(".quest_roll.option").attr("data-qb_id"))
+                                a: 10,
+                                type: 2,
+                                ct: 0
                             });
-                        }
+                        } else if (event.key === "8") {
+                            let set = $("#ekw_sets").find(".option.ek_sets_all" + ":not(.current)").attr("data-set");
+                            if (set != undefined) {
+                                GAME.socket.emit('ga', {
+                                    a: 64,
+                                    type: 2,
+                                    set: set
+                                });
+                            }
+                        } else if (event.key === "9" && JQS.qcc.is(":visible")) {}
                     }
                 });
                 $("body").on("click", ".qlink.load_afo", () => {
@@ -1326,6 +1355,33 @@ if (typeof GAME === 'undefined') {} else {
                     }
                     this.updateSettings();
                 });
+                $("body").on("click", `.quest_roll1.option`, () => {
+                    var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
+                    roll1 = true;
+                    GAME.socket.emit('ga', {
+                        a: 22,
+                        type: 1,
+                        id: id
+                    });
+                });
+                $("body").on("click", `.quest_roll2.option`, () => {
+                    var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
+                    roll2 = true;
+                    GAME.socket.emit('ga', {
+                        a: 22,
+                        type: 1,
+                        id: id
+                    });
+                });
+                $("body").on("click", `.quest_roll3.option`, () => {
+                    var id = parseInt($(".quest_roll.option").attr("data-qb_id"));
+                    roll3 = true;
+                    GAME.socket.emit('ga', {
+                        a: 22,
+                        type: 1,
+                        id: id
+                    });
+                });
             }
         }
         const kws = new kwsv3();
@@ -1353,7 +1409,7 @@ if (typeof GAME === 'undefined') {} else {
                         $('#daily_reward').fadeOut();
                         kom_clear();
                     }, 400);
-                }, 2500);
+                }, 1800);
             }
             setTimeout(() => {
                 if (GAME.emp_wars.length < 3 && GAME.quick_opts.empire) {
@@ -1361,7 +1417,7 @@ if (typeof GAME === 'undefined') {} else {
                         kws.wojny2();
                     }, 300);
                 }
-            }, 1200);
+            }, 1500);
             GAME.startLevel = GAME.char_data.level;
             GAME.startTime = Date.now();
             const emitCalls = [{
@@ -1373,8 +1429,8 @@ if (typeof GAME === 'undefined') {} else {
             }, {
                 a: 29,
                 type: 0
-            }];
-            let cd = [200, 300, 400];
+            }, ];
+            let cd = [300, 600, 900];
             emitCalls.forEach((data, i) => {
                 setTimeout(() => {
                     GAME.socket.emit('ga', data);
@@ -1385,7 +1441,7 @@ if (typeof GAME === 'undefined') {} else {
                 if (kws.check_act()) {
                     $("#secondary_char_stats .activities").click();
                 }
-            }, 600);
+            }, 1200);
             GAME.parseQuickOpts(1);
             kws.workers_info = [false, false];
             arena_count = 0;
@@ -1398,7 +1454,7 @@ if (typeof GAME === 'undefined') {} else {
                         tech_id: 134
                     });
                 }
-            }, 5000);
+            }, 5300);
         }
         GAME.parseQuickOpts = function(newq_bar = false) {
             var opts = '';
@@ -1545,15 +1601,23 @@ if (typeof GAME === 'undefined') {} else {
             var conf = '';
             if (quest.want) {
                 var extr = '';
+                var extr1 = '';
+                var extr2 = '';
+                var extr3 = '';
                 if (quest.difficulty > 0) {
                     var ratio = this.getDiffQuestRatio(1, quest.difficulty);
                     if (ratio < 1) extr = '<span class="green"> - ' + (100 - ratio * 100) + '% </span>';
                     else extr = '<span class="red"> + ' + (ratio * 100 - 100) + '% </span>';
                 }
-                if (quest.can_roll) extr += '<div class="quest_roll option" data-option="quest_roll" data-qb_id="' + quest.qb_id + '" data-toggle="tooltip" data-original-title="<div class=tt>Losuj inną trudność zadania<br />Koszt: 1 Kostka do Gry</div>"></div>';
+                if (quest.can_roll) {
+                    extr += '<div class="quest_roll option" data-option="quest_roll" data-qb_id="' + quest.qb_id + '" data-toggle="tooltip" data-original-title="<div class=tt>Losuj inną trudność zadania<br />Koszt: 1 Kostka do Gry</div>"></div>';
+                    extr1 += '<div class="quest_roll1 option" data-option="quest_roll1" data-qb_id="' + quest.qb_id + '" data-toggle="tooltip" data-original-title="<div class=tt>Losuj -50%<br />Koszt: 1 Kostka do Gry</div>"></div>';
+                    extr2 += '<div class="quest_roll2 option" data-option="quest_roll2" data-qb_id="' + quest.qb_id + '" data-toggle="tooltip" data-original-title="<div class=tt>Losuj 150% lub 200%<br />Koszt: 1 Kostka do Gry</div>"></div>';
+                    extr3 += '<div class="quest_roll3 option" data-option="quest_roll3" data-qb_id="' + quest.qb_id + '" data-toggle="tooltip" data-original-title="<div class=tt>Losuj 200%<br />Koszt: 1 Kostka do Gry</div>"></div>';
+                }
                 con += '<div class="quest_desc">';
                 qrdy = quest.want.is_met;
-                con += '<div><b>' + LNG.lab18 + '</b>:<br />' + this.quest_want(quest.want, quest.qb_id, 1, quest.difficulty) + ' ' + extr + '</div>';
+                con += '<div><b>' + LNG.lab18 + '</b>:<br />' + this.quest_want(quest.want, quest.qb_id, 1, quest.difficulty) + ' ' + extr + ' ' + extr1 + ' ' + extr2 + ' ' + extr3 + '</div>';
                 if (quest.time_limit) {
                     con += '<div>' + LNG.lab145 + ': ' + this.showTimer(quest.want.tl - this.getTime()) + '<button class="newBtn option" data-option="quest_try_again" data-qb_id="' + quest.qb_id + '">' + LNG.lab146 + '</button></div>';
                 }
@@ -1593,18 +1657,7 @@ if (typeof GAME === 'undefined') {} else {
                 kws.solveRiddle(res.q_step.want.riddle);
             }
             setTimeout(() => {
-                if (quest.difficulty != 6 && quest.difficulty != 5 && roll) {
-                    GAME.socket.emit('ga', {
-                        a: 22,
-                        type: 12,
-                        id: quest.qb_id
-                    });
-                } else {
-                    roll = false;
-                }
-            }, 400);
-            setTimeout(() => {
-                if (quest.difficulty != 6 && roll2) {
+                if (quest.difficulty != 6 && quest.difficulty != 5 && roll2 && JQS.qcc.is(":visible")) {
                     GAME.socket.emit('ga', {
                         a: 22,
                         type: 12,
@@ -1613,9 +1666,20 @@ if (typeof GAME === 'undefined') {} else {
                 } else {
                     roll2 = false;
                 }
-            }, 400);
+            }, 300);
             setTimeout(() => {
-                if (quest.difficulty != 1 && roll1) {
+                if (quest.difficulty != 6 && roll3 && JQS.qcc.is(":visible")) {
+                    GAME.socket.emit('ga', {
+                        a: 22,
+                        type: 12,
+                        id: quest.qb_id
+                    });
+                } else {
+                    roll3 = false;
+                }
+            }, 300);
+            setTimeout(() => {
+                if (quest.difficulty != 1 && roll1 && JQS.qcc.is(":visible")) {
                     GAME.socket.emit('ga', {
                         a: 22,
                         type: 12,
@@ -1624,7 +1688,7 @@ if (typeof GAME === 'undefined') {} else {
                 } else {
                     roll1 = false;
                 }
-            }, 400);
+            }, 300);
         };
         GAME.endQuest = function(quest_end) {
             JQS.qcc.hide();
@@ -1704,12 +1768,294 @@ if (typeof GAME === 'undefined') {} else {
             $('#available_servers').html(con);
             $('#available_servers option[value=' + this.server + ']').prop('selected', true);
         };
+        class ballReset {
+            constructor() {
+                this.synergy = 6;
+                this.started = false;
+                this.bonsCombinations = [];
+                this.css = ` #ballResetPanel { position: absolute; top: 35px; right: 10px; z-index: 9999999; width: 445px; padding: 5px; background: #303131bd; border: solid #ffffff7a 1px; border-radius: 5px; display: none; user-select: none; } #ballResetPanel .controller { display: flex; flex-direction: column; align-items: stretch; margin-bottom: 2px; } #ballResetPanel .controller button { font-weight: bolder; border:solid black 1px; cursor: pointer; } #ballResetPanel .controller button.green { background: lime; color: black !important; } #ballResetPanel .controller button.red { background: red; color: black !important; } #ballResetPanel .controller button:first-child { border-bottom:none; background: #afd4f5; } #ballResetPanel .controller button:disabled { opacity: 1; background: gray; cursor: not-allowed; } #ballResetPanel .ballCombination { background: #dfdfdc5c; padding: 5px; margin-bottom: 2px; } #ballResetPanel .ballCombination .combinationID { text-align: center; background: black; color: white; font-weight: bolder; font-size: 16px; padding: 1px; margin-bottom: 2px; } #ballResetPanel .ballCombination select { margin-bottom: 2px; background: #ffffff99; border: solid #6f6f6f 1px; border-radius: 5px; color: black; } #ballResetPanel .ballCombination select:last-child { margin-bottom: 0px; } `;
+                this.innerHTML = ` <div id="ballResetPanel"> <div class="controller"> <button class="addCombination">DODAJ NOWĄ KOMBINACJE</button> <button class="startSearching green">SZUKAJ</button> </div> <div class="combinations">${this.bonsCombination(1)}</div> </div> `;
+                $("body").append(`<style>${this.css}</style>${this.innerHTML}`);
+                $("body").on("click", "#ballResetPanel .addCombination", () => {
+                    let lastID = parseInt($(".ballCombination:last").attr("combination"));
+                    lastID++;
+                    $(".combinations").append(this.bonsCombination(lastID));
+                });
+                $("body").on("click", "#ballResetPanel .startSearching", () => {
+                    this.controller();
+                });
+                $("body").on("click", `button[data-option="ss_page"][data-page="reset"]`, () => {
+                    $("#ballResetPanel").show();
+                });
+                $("body").on("click", `button[data-option="ss_page"][data-page="upgrade"], #soulstone_interface .closeicon`, () => {
+                    if (this.started) {
+                        $("#ballResetPanel .startSearching").click();
+                    }
+                    $('.ss_stats tr').css("background", "transparent");
+                    $("#ballResetPanel").hide();
+                    $("#ss_page_reset").hide();
+                });
+            }
+            controller() {
+                if (this.started) {
+                    this.started = false;
+                    $(".startSearching").removeClass("red").addClass("green").html("SZUKAJ");
+                    $(".ballCombination select").prop("disabled", false);
+                    $(".addCombination").prop("disabled", false);
+                } else {
+                    this.started = true;
+                    this.search();
+                    $(".startSearching").removeClass("green").addClass("red").html("STOP");
+                    $(".ballCombination select").prop("disabled", true);
+                    $(".addCombination").prop("disabled", true);
+                }
+            }
+            search(res = false) {
+                this.bonsCombinations = this.prepareCombinations();
+                if (res) {
+                    this.ballActualBons = this.prepareBallBons(res);
+                } else {
+                    this.ballActualBons = [0]
+                }
+                if (!this.compare(this.ballActualBons, this.bonsCombinations)) {
+                    GAME.socket.emit('ga', {
+                        a: 45,
+                        type: 1,
+                        bid: GAME.ball_id
+                    });
+                } else {
+                    $(".startSearching").click();
+                }
+            }
+            compare(pattern, others) {
+                const patternCounts = this.countOccurrences(pattern);
+                for (let i = 0; i < others.length; i++) {
+                    const other = others[i];
+                    const otherCounts = this.countOccurrences(other);
+                    let isValid = true;
+                    for (const [num, count] of Object.entries(otherCounts)) {
+                        if (!patternCounts[num] || patternCounts[num] < count) {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                    if (isValid) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            countOccurrences(array) {
+                const counts = {};
+                for (const num of array) {
+                    counts[num] = (counts[num] || 0) + 1;
+                }
+                return counts;
+            }
+            prepareBallBons(res) {
+                let ball = res.ball;
+                let bons = [];
+                $('.ss_stats tr').css("background", "transparent");
+                for (var s = 1; s <= 9; s++) {
+                    if (ball['stat' + s] && this.bonsCombinations.some(array => array.includes(ball['stat' + s]))) {
+                        bons.push(ball['stat' + s]);
+                        $('#stat' + s + '_bon').parent().css("background", "#80008075");
+                    }
+                }
+                return bons;
+            }
+            prepareCombinations() {
+                let combinations = [];
+                $(".ballCombination").each((index, element) => {
+                    let combination = [];
+                    $(element).find("select").each((idx, sel) => {
+                        const value = parseInt($(sel).val());
+                        if (value > 0) {
+                            combination.push(value);
+                        }
+                    });
+                    if (combination.length > 0) {
+                        combinations.push(combination);
+                    }
+                });
+                return combinations;
+            }
+            bonsCombination(c) {
+                let innerHTML = `<div class="ballCombination" combination="${c}"><div class="combinationID">Kombinacja #${c}</div>`;
+                for (let i = 0; i < this.synergy; i++) {
+                    innerHTML += `${this.listOfBons(c)}`;
+                }
+                innerHTML += "</div>";
+                return innerHTML;
+            }
+            listOfBons() {
+                let innerHTML = ` <select> <option value="0">Brak</option> `;
+                this.allBons().forEach((obiekt) => {
+                    innerHTML += `<option value="${obiekt.id}">${obiekt.bonus}</option>`;
+                });
+                innerHTML += `</select>`;
+                return innerHTML;
+            }
+            allBons() {
+                return [{
+                    id: 13,
+                    bonus: '% do obrażeń'
+                }, {
+                    id: 14,
+                    bonus: '% do redukcji obrażeń'
+                }, {
+                    id: 15,
+                    bonus: '% do efektywności treningu'
+                }, {
+                    id: 16,
+                    bonus: '% do doświadczenia'
+                }, {
+                    id: 17,
+                    bonus: '% do szansy na trafienie krytyczne'
+                }, {
+                    id: 18,
+                    bonus: '% do redukcji szansy na otrzymanie trafienia krytycznego'
+                }, {
+                    id: 51,
+                    bonus: '% do obrażeń od technik'
+                }, {
+                    id: 52,
+                    bonus: '% redukcji obrażeń od technik'
+                }, {
+                    id: 53,
+                    bonus: '% do szansy na moc z walk PvM'
+                }, {
+                    id: 54,
+                    bonus: '% do ilości mocy z walk PvM'
+                }, {
+                    id: 55,
+                    bonus: '% do szansy na zdobycie przedmiotu z walk PvM'
+                }, {
+                    id: 56,
+                    bonus: 'minut(a) krótsze wyprawy'
+                }, {
+                    id: 57,
+                    bonus: '% do szansy powodzenia wypraw'
+                }, {
+                    id: 58,
+                    bonus: '% do szansy na ulepszenie przedmiotów'
+                }, {
+                    id: 59,
+                    bonus: '% do szansy na połączenie przedmiotów'
+                }, {
+                    id: 60,
+                    bonus: '% do obrażeń od trafień krytycznych'
+                }, {
+                    id: 61,
+                    bonus: '% redukcji obrażeń od trafień krytycznych'
+                }, {
+                    id: 62,
+                    bonus: '% do mocy za wygrane walki wojenne'
+                }, {
+                    id: 63,
+                    bonus: '% do skuteczności podpaleń'
+                }, {
+                    id: 64,
+                    bonus: '% do skuteczności krwawień'
+                }, {
+                    id: 65,
+                    bonus: '% do odporności na podpalenia'
+                }, {
+                    id: 66,
+                    bonus: '% do odporności na krwawienia'
+                }, {
+                    id: 67,
+                    bonus: '% do szansy na zdobycie PSK'
+                }, {
+                    id: 68,
+                    bonus: '% do punktów PvP za wygrane walki'
+                }, {
+                    id: 69,
+                    bonus: '% do szansy na 3x więcej punktów PvP za wygrane walki'
+                }, {
+                    id: 70,
+                    bonus: '% do szansy na 3x więcej doświadczenia za wygrane walki PvM'
+                }, {
+                    id: 71,
+                    bonus: '% do mocy za skompletowanie SK'
+                }, {
+                    id: 72,
+                    bonus: '% do mocy za skompletowanie PSK'
+                }, {
+                    id: 73,
+                    bonus: 'minut(y) do czasu trwania błogosławieństw'
+                }, {
+                    id: 74,
+                    bonus: '% do szansy na spotkanie legendarnych potworów'
+                }, {
+                    id: 75,
+                    bonus: 'minut(y) krótszy cooldown między walkami PvP'
+                }, {
+                    id: 76,
+                    bonus: '% zwiększenie własnej szybkości'
+                }, {
+                    id: 77,
+                    bonus: '% obniżenie szybkości przeciwnika'
+                }, {
+                    id: 78,
+                    bonus: '% do szansy na zdobycie Niebieskiego Senzu'
+                }, {
+                    id: 79,
+                    bonus: '% mniejsze obrażenia od podpaleń'
+                }, {
+                    id: 80,
+                    bonus: '% mniejsze obrażenia od krwawień'
+                }, {
+                    id: 81,
+                    bonus: '% do szansy na zdobycie Scoutera'
+                }, {
+                    id: 91,
+                    bonus: '% do wtajemniczenia'
+                }, {
+                    id: 99,
+                    bonus: '% większy limit dzienny Niebieskich Senzu'
+                }, {
+                    id: 139,
+                    bonus: '% do ilości zdobywanych kryształów instancji'
+                }, {
+                    id: 140,
+                    bonus: '% do przyrostu Punktów Akcji'
+                }, {
+                    id: 154,
+                    bonus: '% do sławy za walki w wojnach imperiów'
+                }, {
+                    id: 160,
+                    bonus: '% do boskiego atrybutu przewodniego'
+                }, {
+                    id: 163,
+                    bonus: '% więcej Boskiej Ki za CSK'
+                }, {
+                    id: 171,
+                    bonus: '% do max Punktów Akcji'
+                }];
+            }
+        }
+        const kulka = new ballReset();
+        GAME.completeProgress = () => {
+            var res = GAME.progress;
+            switch (res.a) {
+                case 45:
+                    if (res.ball) {
+                        GAME.parseData(55, res);
+                        if (kulka.started) {
+                            kulka.search(res);
+                        }
+                    }
+                    break;
+            }
+            delete GAME.progress;
+        }
         let adimp = false;
         let arena_count = 0;
         let pvp_count = 0;
-        let roll = false;
-        let roll1 = false;
         let roll2 = false;
-        let version = '3.0.11';
+        let roll1 = false;
+        let roll3 = false;
+        let version = '3.0.15';
 }, 50);
 }
