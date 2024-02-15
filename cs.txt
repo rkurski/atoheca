@@ -95,7 +95,7 @@ if (typeof GAME === 'undefined') {} else {
                 }, 200);
             }
             loadRiddles(cb) {
-                fetch('https://raw.githubusercontent.com/rkurski/x3dupa3x/main/riddles.txt')
+                fetch('https://raw.githubusercontent.com/rkurski/atoheca/master/riddles.txt')
                     .then((res) => res.text())
                     .then((data) => {
                         cb(data);
