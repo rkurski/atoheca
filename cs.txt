@@ -59,6 +59,8 @@ if (typeof GAME === 'undefined') {} else {
                 this.addToCSS(`#page_game_camp .ekw_slot.smaller img{ width: 64px; } #page_game_camp div[data-item_id="1923"].smaller img { width: 32px; position: absolute; margin-top: -64px; margin-left: 34px; }`);
                 this.addToCSS(`#kws_spawn{ background: rgba(0,0,0,0.9); position: absolute; top: -250px;left: -210px; z-index: 9999; width: 200px; padding: 1px; border-radius: 5px; border-style: solid; border-width: 7px 8px 7px 7px; display:block; user-select: none; color: #333333; } #kws_spawn .sekcja { position: absolute; top: -27px; left: -7px; background: rgba(0,0,0,0.9); filter: hue-rotate(150deg); background-size: 100% 100%; width: 200px; cursor: all-scroll; } #kws_spawn .spawn_row{border-bottom:solid gray 1px; color: white; font-size: 13px; display: flex; padding:4px;}`);
                 $("#map_canvas_container").append(`<div id="kws_spawn"> <div class="sekcja"><img src="/gfx/layout/war.png" class="spawn_switch">USTAWIENIA SPAWNU</div><div id="kws_spawn2" style="">${this.spawnList()}</div>`);
+                this.addToCSS(`#sc_setss div{min-width: 40px; width: auto; padding: 0 5px;color: white;font-weight:bold;text-align:center;height:30px;line-height:30px;border:1px solid white;margin-left:1px;float:left;margin-top: 3px;} #sc_setss div.current{color:orange;border:1px solid orange;}`);
+                this.addToCSS(`#sc_sets .sc_sets_all { min-width: 40px; width: auto; padding: 0 5px; } .cards_set_name_input { background: #040e13; height: 31px; width: 180px; border: solid #ffffff4d 1px; display: inline-block; text-align: center; font-size: 13px; color: #305779; font-family: 'Play', sans-serif; vertical-align: middle; border-radius: 5px; margin-right: 5px; } .cards_set_name_button { margin-top: 2px; }`);
                 this.addToCSS(`.spawn_switch{cursor:pointer;}`);
                 this.addToCSS(`.quest_roll1{position:absolute; width:50px; height:50px; background:url('/gfx/layout/dice.png') 0 0; top:-25px; left:25px; cursor:pointer; filter:drop-shadow(0px 0px 10px lime)} .quest_roll2{position:absolute; width:50px; height:50px; background:url('/gfx/layout/dice.png') 0 0; top:-25px; left:75px; cursor:pointer; filter:drop-shadow(0px 0px 10px #00fdff)} .quest_roll3{position:absolute; width:50px; height:50px; background:url('/gfx/layout/dice.png') 0 0; top:-25px; left:125px; cursor:pointer; filter:drop-shadow(0px 0px 10px #ff0000)} .quest_roll:hover{background:url('/gfx/layout/dice.png') 0 -45px;} .quest_roll1:hover{background:url('/gfx/layout/dice.png') 0 -45px;} .quest_roll2:hover{background:url('/gfx/layout/dice.png') 0 -45px;} .quest_roll3:hover{background:url('/gfx/layout/dice.png') 0 -45px;}`);
                 $("#top_bar").append(`<div class="kws_top_bar"></div>`);
@@ -67,6 +69,8 @@ if (typeof GAME === 'undefined') {} else {
                 $("#clan_inner_planets h3").eq(0).append(`<button id="poka_telep" style="margin-left:5px;" class="newBtn">pokaż / ukryj salę telep</button>`);
                 $(`<button class="newBtn free_assist_for_all" style="margin-right:5px;">Asystuj wszystkim za darmo</button>`).insertBefore(`button[data-option="clan_assist_all"]`);
                 $("#clan_inner_wars h3").eq(0).append(` <button class="newBtn activate_all_clan_buffs">Aktywuj wszystkie buffy</button>`);
+                $("#top_bar").append(`<div id="sc_setss"><div id="sc_sett0" class="option sc_setss_all current" data-option="change_sc_set" data-set="0">I</div><div id="sc_sett1" class="option sc_setss_all" data-option="change_sc_set" data-set="1">II</div><div id="sc_sett2" class="option sc_setss_all" data-option="change_sc_set" data-set="2">III</div><div id="sc_sett3" class="option sc_setss_all" data-option="change_sc_set" data-set="3">IV</div><div id="sc_sett4" class="option sc_setss_all" data-option="change_sc_set" data-set="4">V</div></div>`);
+                $("#sc_setss").hide();
                 $(`#minimap_con`).append(`<div id="kws_locInfo"><div class="sekcja">INFORMACJE O LOKACJI</div><div class="content"></div></div>`);
                 $("#sett_page_local div").eq(0).prepend(`<b class="green">Zmień tło strony </b><div class="game_input"><input id="new_website_bg" style="width:370px;" type="text"></div><button class="option newBtn kws_change_website_bg" style="margin-left:5px;">Zmień</button><button class="option newBtn kws_reset_website_bg" style="margin-left:5px;">Reset</button><br><br>`);
                 this.workers_info = [false, false];
@@ -96,12 +100,11 @@ if (typeof GAME === 'undefined') {} else {
             }
             loadRiddles(cb) {
                 fetch('https://raw.githubusercontent.com/rkurski/atoheca/master/riddles.txt')
-                    .then((res) => res.text())
-                    .then((data) => {
-                        cb(data);
-                    })
-                    .catch((error) => {
-                        console.error("Fetch data error:", error);
+                    .then(res => res.json())
+                    .then((out) => {
+                    cb(out)
+                    }).catch((error) => {
+                        throw err
                     });
             }
             solveRiddle(r_id) {
@@ -114,7 +117,8 @@ if (typeof GAME === 'undefined') {} else {
                 let settings = JSON.parse(localStorage.getItem("kws_settings"));
                 let settings_sample = {
                     hide_tracker: false,
-                    aeCodes: false
+                    aeCodes: false,
+                    sets: {}
                 };
                 if (settings) {
                     for (const key of Object.keys(settings_sample)) {
@@ -131,6 +135,34 @@ if (typeof GAME === 'undefined') {} else {
             }
             updateSettings() {
                 localStorage.setItem('kws_settings', JSON.stringify(this.settings));
+            }
+            getCardSetsNames() {
+                if (this.settings.sets[GAME.char_data.id]) {
+                    const set = this.settings.sets[GAME.char_data.id];
+                    for (let i = 0; i < set.length; i++) {
+                        $(`#sc_sets div[data-set="${i}"]`).html(set[i]);
+                        $(`#sc_setss div[data-set="${i}"]`).html(set[i]);
+                    }
+                } else {
+                    const set = ["I", "II", "III", "IV", "V"];
+                    for (let i = 0; i < set.length; i++) {
+                        $(`#sc_sets div[data-set="${i}"]`).html(set[i]);
+                        $(`#sc_setss div[data-set="${i}"]`).html(set[i]);
+                    }
+                }
+            }
+            updateCardSetsNames(set_id) {
+                const set_name = $(".cards_set_name_input").val();
+                if (set_name.length <= 10) {
+                    $(`#sc_sets div[data-set="${set_id}"]`).html(set_name);
+                    $(`#sc_setss div[data-set="${set_id}"]`).html(set_name);
+                    this.settings.sets[GAME.char_data.id] = [this.getSetName(0), this.getSetName(1), this.getSetName(2), this.getSetName(3), this.getSetName(4)];
+                    this.updateSettings();
+                }
+                kom_clear();
+            }
+            getSetName(i) {
+                return $(`#sc_sets div`).eq(i).html();
             }
             goEmpPos() {
                 let imp_pos = $(".empPos").position();
@@ -1103,6 +1135,35 @@ if (typeof GAME === 'undefined') {} else {
                 $("body").on("click", `.kws_top_bar_section.trader_info`, () => {
                     GAME.page_switch('game_events');
                 });
+                $("body").on("click", `#sc_set0 , #sc_sett0`, () => {
+                    $('.sc_setss_all').removeClass('current');
+                    $('#sc_sett' + 0).addClass('current');
+                });
+                $("body").on("click", `#sc_set1 , #sc_sett1`, () => {
+                    $('.sc_setss_all').removeClass('current');
+                    $('#sc_sett' + 1).addClass('current');
+                });
+                $("body").on("click", `#sc_set2 , #sc_sett2`, () => {
+                    $('.sc_setss_all').removeClass('current');
+                    $('#sc_sett' + 2).addClass('current');
+                });
+                $("body").on("click", `#sc_set3 , #sc_sett3`, () => {
+                    $('.sc_setss_all').removeClass('current');
+                    $('#sc_sett' + 3).addClass('current');
+                });
+                $("body").on("click", `#sc_set4 , #sc_sett4`, () => {
+                    $('.sc_setss_all').removeClass('current');
+                    $('#sc_sett' + 4).addClass('current');
+                });
+                $("body").on("contextmenu", "#sc_sets .sc_sets_all", function(event) {
+                    event.preventDefault();
+                    const set = parseInt($(this).attr("data-set"));
+                    GAME.komunikat(`<h5>ZMIEŃ NAZWĘ SETU NR. ${set+1}</h5><input class="cards_set_name_input" type="text" value="${$(this).html()}" maxlength="10" /><br><button class="cards_set_name_button btn_small_gold" set-id="${set}">ZAPISZ</button>`);
+                });
+                $("body").on("click", ".cards_set_name_button", (el) => {
+                    const setID = parseInt($(el.target).attr("set-id"));
+                    this.updateCardSetsNames(setID);
+                });
                 $("body").on("click", `.kws_top_bar_section.train_upgr_info`, () => {
                     GAME.page_switch('game_train');
                 });
@@ -1394,67 +1455,87 @@ if (typeof GAME === 'undefined') {} else {
                 kom_close_bind();
             }
         }
-        GAME.cached_data = function() {
-            var pos = $('#char_buffs').offset();
-            pos.left -= 75;
-            pos.top -= 75;
-            this.char_buffs_pos = pos;
-            if (GAME.char_id != 0 && GAME.quick_opts.online_reward) {
-                setTimeout(() => {
-                    GAME.socket.emit('ga', {
-                        a: 26,
-                        type: 1
-                    });
-                    setTimeout(() => {
-                        $('#daily_reward').fadeOut();
-                        kom_clear();
-                    }, 400);
-                }, 1800);
+        GAME.useChar = function(res) {
+            this.locked_pages = [];
+            $('#war_container').hide();
+            $('#ewar_list').html('');
+            $('#war_list').html('');
+            $('.brolly').hide();
+            $('.bblack').hide();
+            $('.bardock').hide();
+            $('.cps').show();
+            this.koms = [];
+            this.safe_zone = false;
+            this.page_switch('game_intro');
+            this.char_id = res.char_id;
+            this.char_data = res.char_data;
+            this.char_tables = res.char_tables;
+            this.char_bonuses = res.char_bonuses;
+            this.premium = res.main_premium;
+            this.parseSSJ(res.ssj);
+            this.server_rates = res.server_rates;
+            this.server_helpers = res.server_helpers;
+            this.skill_data = res.skill_data;
+            this.masters = res.masters;
+            this.parseServerData();
+            this.maploaded = false;
+            this.premiumBonCnt();
+            this.map.initiated = false;
+            this.clan_laws = res.clan_laws;
+            this.is_clan_chief = res.clan_chief;
+            PJS.pra.innerText = this.dots(this.premium);
+            this.parseTimed();
+            $('#godness').hide();
+            if (this.char_data.god) $('#godness').show();
+            if (this.char_data.race == 4) $('.brolly').show();
+            if (this.char_data.race == 5) $('.bblack').show();
+            if (this.char_data.race == 6) $('.bardock').show();
+            $('.char_avatar').attr('src', res.avatar);
+            $('.need_reborn').hide();
+            $('.restoreonrelog').show();
+            $('#ekw_back').removeClass().addClass('ekw_bck').addClass('tlo_ekw' + this.char_data.race);
+            if (this.char_data.last_map) $('#lastmap_bar').show();
+            else $('#lastmap_bar').hide();
+            if (this.char_data.reborn >= 2) $('.need_reborn2').show();
+            if (this.char_data.reborn >= 3) $('.need_reborn3').show();
+            if (this.char_data.reborn == 4) $('.need_reborn4').show();
+            if (this.char_data.reborn >= 5) $('.need_reborn5').show();
+            this.expTooltipUpdate(0);
+            this.charValuesBind(['name', 'mastery_hired', 'mastery_exp2', 'mastery_lvl', 'lssj', 'rage', 'bardock_points', 'anger', 'soul_slots', 'soul_floor_resets', 'sila', 'szyb', 'wytrz', 'swoli', 'ki', 'exp', 'reborn', 'level', 'pr', 'pr_max', 'pr_ph', 'pr_time', 'moc', 'x', 'y', 'doubler_rate', 'divine_particle', 'doublerx', 'kk', 'god', 'wta', 'gki', 'instynkt', 'pvp', 'kills', 'school_rep', 'senzu_limit', 'sentinel', 'divine', 'minor_ball', 'friend_limit', 'trybut', 'clan_pu', 'planetary', 'level_lock', 'soul_floor', 'item_drop_mode', 'ekw_max_sets', 'ekw_set', 'sc_set', 'alt_transform_expiry']);
+            this.paBarUpdate(0);
+            $('#char_stat_100').text(this.dots(this.senzu_limit()));
+            $('.char_logged').show();
+            for (var i = 0; i <= this.chat_channels; i++) {
+                this.chat_data[i] = {
+                    messages: [],
+                    last_message: this.getTime(),
+                    old_loaded: false,
+                    new_msg_cnt: 0
+                };
             }
-            setTimeout(() => {
-                if (GAME.emp_wars.length < 3 && GAME.quick_opts.empire) {
-                    setTimeout(() => {
-                        kws.wojny2();
-                    }, 300);
-                }
-            }, 1500);
-            GAME.startLevel = GAME.char_data.level;
-            GAME.startTime = Date.now();
-            const emitCalls = [{
-                a: 33,
-                type: 0
-            }, {
-                a: 49,
-                type: 0
-            }, {
-                a: 29,
-                type: 0
-            }, ];
-            let cd = [300, 600, 900];
-            emitCalls.forEach((data, i) => {
-                setTimeout(() => {
-                    GAME.socket.emit('ga', data);
-                }, cd[i]);
-            });
-            $('#train_uptime').html(GAME.showTimer(GAME.char_data.train_ucd - GAME.getTime()));
-            setTimeout(() => {
-                if (kws.check_act()) {
-                    $("#secondary_char_stats .activities").click();
-                }
-            }, 1200);
-            GAME.parseQuickOpts(1);
-            kws.workers_info = [false, false];
-            arena_count = 0;
-            pvp_count = 0;
-            setTimeout(() => {
-                if ((GAME.char_data.reborn == 4 || GAME.char_data.reborn == 5) && GAME.char_data.alt_transform_expiry < GAME.getTime()) {
-                    GAME.socket.emit('ga', {
-                        a: 18,
-                        type: 8,
-                        tech_id: 134
-                    });
-                }
-            }, 5300);
+            this.chat_nonread = 0;
+            this.updateChatRead(-1);
+            this.cached_data(res);
+            this.prepareMapOpts();
+            $('.kom').remove();
+            this.chat_switch = 0;
+            $('.clan_channel').hide();
+            this.prepareChatChannels();
+            $('#chat_swi').text(LNG.lab379);
+            select_chat_channel(1);
+            if (this.char_data.race == 3) $('#trunks_camp').show();
+            else $('#trunks_camp').hide();
+            $('#char_prifile').data('char_id', this.char_id);
+            $('#bless_players').val(this.char_data.name);
+            $('.mdragon_balls').hide();
+            this.mf = {};
+            this.md = {};
+            $('.mdbb').removeClass('active');
+            this.cancelTutorial();
+            this.parseChatNotifications();
+            if (this.any_captcha) grecaptcha.reset();
+            delete this.trainupnotisend;
+            delete this.trainup_visible;
         }
         GAME.parseQuickOpts = function(newq_bar = false) {
             var opts = '';
@@ -1563,6 +1644,73 @@ if (typeof GAME === 'undefined') {} else {
             if (petd.qualified) res += '<b class=green>' + LNG.lab314 + '</b><br />';
             res += '</div>';
             return res;
+        }
+        GAME.cached_data = function(res) {
+            var pos = $('#char_buffs').offset();
+            pos.left -= 75;
+            pos.top -= 75;
+            this.char_buffs_pos = pos;
+            if (GAME.char_id != 0 && GAME.quick_opts.online_reward) {
+                setTimeout(() => {
+                    GAME.socket.emit('ga', {
+                        a: 26,
+                        type: 1
+                    });
+                    setTimeout(() => {
+                        $('#daily_reward').fadeOut();
+                        kom_clear();
+                    }, 300);
+                }, 1500);
+            }
+            $("#sc_setss").show();
+            let set = $("#sc_sets .option.sc_sets_all.current").attr("data-set");
+            $('.sc_setss_all').removeClass('current');
+            $('#sc_sett' + set).addClass('current');
+            setTimeout(() => {
+                if (GAME.emp_wars.length < 3 && GAME.quick_opts.empire) {
+                    setTimeout(() => {
+                        kws.wojny2();
+                    }, 300);
+                }
+            }, 1800);
+            GAME.startLevel = GAME.char_data.level;
+            GAME.startTime = Date.now();
+            const emitCalls = [{
+                a: 33,
+                type: 0
+            }, {
+                a: 49,
+                type: 0
+            }, {
+                a: 29,
+                type: 0
+            }, ];
+            let cd = [300, 600, 900];
+            emitCalls.forEach((data, i) => {
+                setTimeout(() => {
+                    GAME.socket.emit('ga', data);
+                }, cd[i]);
+            });
+            $('#train_uptime').html(GAME.showTimer(GAME.char_data.train_ucd - GAME.getTime()));
+            setTimeout(() => {
+                if (kws.check_act()) {
+                    $("#secondary_char_stats .activities").click();
+                }
+            }, 1200);
+            GAME.parseQuickOpts(1);
+            kws.workers_info = [false, false];
+            arena_count = 0;
+            pvp_count = 0;
+            kws.getCardSetsNames();
+            setTimeout(() => {
+                if ((GAME.char_data.reborn == 4 || GAME.char_data.reborn == 5) && GAME.char_data.alt_transform_expiry < GAME.getTime()) {
+                    GAME.socket.emit('ga', {
+                        a: 18,
+                        type: 8,
+                        tech_id: 134
+                    });
+                }
+            }, 5300);
         }
         GAME.abbreviateNumber = function(number, decPlaces = 2) {
             decPlaces = Math.pow(10, decPlaces);
@@ -1785,6 +1933,20 @@ if (typeof GAME === 'undefined') {} else {
                     this.controller();
                 });
                 $("body").on("click", `button[data-option="ss_page"][data-page="reset"]`, () => {
+                    GAME.completeProgress = () => {
+                        var res = GAME.progress;
+                        switch (res.a) {
+                            case 45:
+                                if (res.ball) {
+                                    GAME.parseData(55, res);
+                                    if (kulka.started) {
+                                        kulka.search(res);
+                                    }
+                                }
+                                break;
+                        }
+                        delete GAME.progress;
+                    };
                     $("#ballResetPanel").show();
                 });
                 $("body").on("click", `button[data-option="ss_page"][data-page="upgrade"], #soulstone_interface .closeicon`, () => {
@@ -2036,26 +2198,160 @@ if (typeof GAME === 'undefined') {} else {
             }
         }
         const kulka = new ballReset();
-        GAME.completeProgress = () => {
-            var res = GAME.progress;
-            switch (res.a) {
-                case 45:
-                    if (res.ball) {
-                        GAME.parseData(55, res);
-                        if (kulka.started) {
-                            kulka.search(res);
-                        }
+        class ballUpgrade {
+            constructor() {
+                this.upgradeAllText = 'Ulepszaj wszystkie';
+                this.stopText = 'Zatrzymaj';
+                this.waitingForResponse = false;
+                this.bonuses = [];
+                this.synergy = parseInt($("#ss_synergy_lvl").html());
+                this.started = false;
+                $("body").on("click", `button[data-option="ss_page"][data-page="upgrade"]`, () => {
+                    this.showCheckboxes();
+                    this.showUpgradeAllButton();
+                });
+                $("body").on("click", `button[data-option="ss_page"][data-page="reset"], #soulstone_interface .closeicon`, () => {
+                    if (this.started) {
+                        this.stopUpgrading();
                     }
-                    break;
+                    this.hideCheckboxes();
+                    this.hideUpgradeAllButton();
+                });
+                $("body").on("click", `button[data-option="ss_upgrade_all"]`, () => {
+                    this.controller();
+                });
             }
-            delete GAME.progress;
+            controller() {
+                if (this.started) {
+                    this.started = false;
+                    this.stopUpgrading();
+                } else {
+                    this.started = true;
+                    this.startUpgrading();
+                }
+                this.switchCheckboxesState();
+                this.switchButtonText();
+            }
+            startUpgrading() {
+                if (this.started) {
+                    GAME.completeProgress = () => {
+                        var res = GAME.progress;
+                        switch (res.a) {
+                            case 45:
+                                if (res.ball) {
+                                    GAME.parseData(55, res);
+                                    if (this.started) {
+                                        if (this.waitingForResponse) {
+                                            this.waitingForResponse = false;
+                                        }
+                                        this.upgrade();
+                                    }
+                                }
+                                break;
+                        }
+                        delete GAME.progress;
+                    };
+                    this.bonuses = [];
+                    this.upgrade();
+                }
+            }
+            stopUpgrading() {
+                GAME.completeProgress = () => {
+                    var res = GAME.progress;
+                    switch (res.a) {
+                        case 45:
+                            if (res.ball) {
+                                GAME.parseData(55, res);
+                            }
+                            break;
+                    }
+                    delete GAME.progress;
+                };
+                this.waitingForResponse = false;
+                if (this.started) {
+                    this.controller()
+                }
+            }
+            upgrade() {
+                if (this.waitingForResponse) {
+                    return;
+                }
+                this.rateUpgrade();
+            }
+            sendUpgrade() {
+                GAME.emitOrder({
+                    a: 45,
+                    type: 3,
+                    bid: GAME.ball_id
+                });
+                this.waitingForResponse = true;
+            }
+            rateUpgrade() {
+                var shouldAcceptUpgrade = false;
+                this.markBonuses();
+                shouldAcceptUpgrade = this.evaluateBonuses();
+                if (shouldAcceptUpgrade) {
+                    GAME.emitOrder({
+                        a: 45,
+                        type: 5,
+                        bid: GAME.ball_id
+                    });
+                }
+                setTimeout(this.sendUpgrade, shouldAcceptUpgrade ? 300 : 0);
+            }
+            markBonuses() {
+                this.bonuses = [];
+                $('.ball_stats.stat_page tr[id]:not([style*="display: none"])').each((value, index, array) => {
+                    this.bonuses.push($(`#bon${value + 1}_upgrade`)[0].checked);
+                }, this);
+                let allUnchecked = this.bonuses.every((value, index, array) => {
+                    value == false;
+                }, this);
+                if (allUnchecked) {
+                    this.stopUpgrading
+                }
+            }
+            evaluateBonuses() {
+                var sum = 0;
+                this.bonuses.forEach((shouldInclude, index, array) => {
+                    if (shouldInclude) {
+                        sum += parseFloat($(`#ss_change_${index+1}`).text());
+                    }
+                }, this);
+                return sum >= 0;
+            }
+            showCheckboxes() {
+                $('.ball_stats.stat_page tr[id]:not([style*="display: none"])').each(function(index) {
+                    $(`#stat${index + 1}_bon`).after(`<input type="checkbox" id="bon${index + 1}_upgrade" value=${index + 1}>`);
+                });
+            }
+            switchCheckboxesState() {
+                $(".ball_stats.stat_page input[type=checkbox]").each((index) => {
+                    $(`#bon${index + 1}_upgrade`).prop('disabled', !this.started);
+                });
+            }
+            hideCheckboxes() {
+                $(".ball_stats.stat_page input[type=checkbox]").each((index) => {
+                    $(`#bon${index + 1}_upgrade`).remove();
+                });
+            }
+            showUpgradeAllButton() {
+                $("#ss_page_upgrade > button").after('<button class="newBtn option" data-option="ss_upgrade_all">Ulepszaj wszystkie</button>');
+            }
+            switchButtonText() {
+                $('#ss_page_upgrade button[data-option="ss_upgrade_all"]').html(`${this.started ? this.stopText : this.upgradeAllText}`);
+            }
+            hideUpgradeAllButton() {
+                $('#ss_page_upgrade button[data-option="ss_upgrade_all"]').remove();
+            }
         }
+        const kulka_upg = new ballUpgrade();
         let adimp = false;
         let arena_count = 0;
         let pvp_count = 0;
         let roll2 = false;
         let roll1 = false;
         let roll3 = false;
-        let version = '3.0.15';
+        let version = '3.0.17';
 }, 50);
 }
